@@ -306,25 +306,26 @@ getFood()
 </div>
 
 <div class=" my-3">
-<span class="bord">  ${items[i].strMeasure4} ${items[i].strIngredient4 == [] ? "Yummy": items[i].strIngredient54}</span>
-<span class="bord"> ${items[i].strMeasure5}  ${items[i].strIngredient5 == [] ? "Yummy": items[i].strIngredient5}</span>
-<span class="bord " id="sp6">  ${items[i].strMeasure6} ${items[i].strIngredient6 == [] ? "Yummy": items[i].strIngredient6}</span>
+<span class="bord">  ${items[i].strMeasure4} ${items[i].strIngredient4 == [] | null ? "Yummy": items[i].strIngredient4}</span>
+<span class="bord"> ${items[i].strMeasure5}  ${items[i].strIngredient5 == [] | null ? "Yummy": items[i].strIngredient5}</span>
+<span class="bord " id="sp6">  ${items[i].strMeasure6} ${items[i].strIngredient6 == [] | null ? "Yummy": items[i].strIngredient6}</span>
 
 
 
 </div>
 
 <div class=" mb-3">
-<span class="bord">  ${items[i].strMeasure7} ${items[i].strIngredient7 == [] ? "Yummy": items[i].strIngredient7}</span>
-<span class="bord">  ${items[i].strMeasure8} ${items[i].strIngredient8 == [] ? "Yummy": items[i].strIngredient8}</span>
-<span class="bord">  ${items[i].strMeasure9} ${items[i].strIngredient9 == [] ? "Yummy": items[i].strIngredient9}</span>
+<span class="bord">  ${items[i].strMeasure7} ${items[i].strIngredient7 == [] | null ? "Yummy": items[i].strIngredient7}</span>
+<span class="bord">  ${items[i].strMeasure8} ${items[i].strIngredient8 == [] | null ? "Yummy": items[i].strIngredient8}</span>
+<span class="bord">  ${items[i].strMeasure9} ${items[i].strIngredient9 == [] | null ? "Yummy": items[i].strIngredient9}</span>
 
 
 </div>
 
 <div class="mb-3">
-<span class="bord ">  ${items[i].strMeasure10} ${items[i].strIngredient10 == [] ? "Yummy": items[i].strIngredient10}</span>
-<span class="bord ">  ${items[i].strMeasure11} ${items[i].strIngredient11 == [] ? "Yummy": items[i].strIngredient11}</span>
+<span class="bord ">  ${items[i].strMeasure10} ${items[i].strIngredient10 == [] | null ? "Yummy": items[i].strIngredient10}</span>
+<span class="bord ">  ${items[i].strMeasure11} ${items[i].strIngredient11 == [] | null ? "Yummy": items[i].strIngredient11}</span>
+<span class="bord ">  ${items[i].strMeasure12} ${items[i].strIngredient12 == [] | null ? "Yummy": items[i].strIngredient12}</span>
 </div>
 
 
@@ -332,7 +333,7 @@ getFood()
 
 <div>
 <h3 class="mb-3">Tages : </h3>
-<span  class =" aler btn-sm">${items[i].strTags  == null? '#' : items[i].strTags}</span> <br>
+<span  class =" aler btn-sm">${items[i].strTags  == null | [] ? '#' : items[i].strTags}</span> <br>
 
 
 </div>
