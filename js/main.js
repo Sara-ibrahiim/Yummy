@@ -582,10 +582,10 @@ s.addEventListener('click',searchcontact)
 function searchcontact() {
     $("#goodfood").remove();
     box= ` <div class="col-md-6" id="inp1">
-    <input onkeyup="searchl(this.value)" id="ByName"  class="form-control bg-transparent text-white" type="text" placeholder="Search By Name">
+    <input onkeyup="searchl(this.value.0)" id="ByName"  class="form-control bg-transparent text-white" type="text" placeholder="Search By Name">
 </div>
 <div class="col-md-6" id="inp2">
-    <input onkeyup="searchl(this.value)" maxlength="1" class="form-control bg-transparent text-white" type="text" placeholder="Search By First Letter">
+    <input onkeyup="searchl(this.value[0],1)" maxlength="1" class="form-control bg-transparent text-white" type="text" placeholder="Search By First Letter">
 </div>`
 
 document.getElementById('row').innerHTML= box
