@@ -53,9 +53,18 @@ height: 85%;
     top: 0%;
   
 }
+ul{
+    list-style: none;
+    padding-left: 0% !important;
+  
+}
+li{
+    display: inline-block;
+
+}
 .bord{
     padding: 6px;
-    margin: 40px 5px;
+    margin: 10px 2px;
     border-radius: 5px;
     border: 1xp solid #b6effb;
     color: #055160;
