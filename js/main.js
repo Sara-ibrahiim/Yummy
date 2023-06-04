@@ -1,4 +1,16 @@
 
+var innr = $('.inner-bar').innerWidth();  
+
+function closenav(){
+ 
+
+    $('#sideBar').animate({left: `-${innr}`},500)
+    $(".open-close-icon").removeClass("fa-x");
+    $(".open-close-icon").addClass("fa-align-justify");
+    
+
+ 
+}
 
   let submitBtn;
     $(document).ready(function () {
@@ -45,7 +57,12 @@ document.getElementById("search-item").innerHTML
 
  async function getcategorie(){
     $("#loading").fadeIn(300)
+   
     $(".del").remove();
+    closenav()
+
+   
+  
     let myResponse = await fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`)
     let next = await myResponse.json()
     let itemsG = next.categories
@@ -74,6 +91,7 @@ document.getElementById("search-item").innerHTML
     $("#loading").fadeIn(300)
     $("#Categ").remove();
     $(".del").remove();
+    closenav()
     let myResponse = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${meal_ca}`)
     let next = await myResponse.json()
     let itemsAF = next.meals
@@ -106,6 +124,7 @@ let a = document.getElementById("Area");
 async function getarea(){
     $("#loading").fadeIn(300)
     $(".del").remove();
+    closenav()
     let myResponse = await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?a=list`)
     let next = await myResponse.json()
     let itemsA = next.meals
@@ -132,6 +151,7 @@ async function getarea(){
     $("#loading").fadeIn(300)
     $("#areadelet").remove();
     $(".del").remove();
+    closenav()
     let myResponse = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${Area}`)
     let next = await myResponse.json()
     let itemsAF = next.meals
@@ -168,6 +188,7 @@ async function getarea(){
  async function getIngredients(){
     $("#loading").fadeIn(300)
     $(".del").remove();
+    closenav()
 
     let myResponse = await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`)
     let next = await myResponse.json()
@@ -195,6 +216,7 @@ async function fliterIngredients(mealin){
     $("#loading").fadeIn(300)
     $(".getIn").remove();
     $(".del").remove();
+    closenav()
     let myResponse = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${mealin}`)
     let next = await myResponse.json()
     let items = next.meals.slice(0, 20)
@@ -222,6 +244,7 @@ async function fliterIngredients(mealin){
 
  // Home page
 async function getFood(){
+
     
     let myResponse = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s`)
     let next = await myResponse.json()
@@ -254,24 +277,58 @@ getFood()
     $("#loading").fadeIn(300)
     $("#goodfood").remove();
     $(".del").remove();
+    closenav()
     let myResponse = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealS}`)
     let next = await myResponse.json()
     let items  = next.meals
+    let mealInfo =items[0]
+    let mealIngredient =[];
+    let mealMeasure=[];
+    let IngredientsStr = ``;
 
-    // const arr = items;
-    // const noEmptyStrings = arr.filter((str) => str !== '');
-    // console.log(noEmptyStrings); 
+    //.split(' ').slice(0,1).join(' ')
 
-    // let tags = items.strTags?.split(",")
-    // // let tags = meal.strTags.split(",")
-    // if (!tags) tags = []
+/*
+  let tages =next.meals.strTags.split(' ').slice(0,1).join(' ')
+     let tages =next.meals.strTags?.split(",");*/
+     /*
+    let tagsinfo=[];
+     let tagdisplay = ``;
+     for (const key in mealInfo) {
+     
+         if (key.startsWith ('strTags')) 
+            if(mealInfo[key].trim().length!=0)
+            tagsinfo.push(mealInfo[key])
+       
 
-    // let y = ''
-    // for (let i = 0; i < tags.length; i++) {
-    //    y+= `
-    //     <li class="alert alert-danger m-2 p-1">${tags[i]}</li>`
-    //     console.log(y)
-    // }
+        
+     }
+     for (let index = 0; index < tagsinfo.length; index++) {
+         tagdisplay+= `
+         <span  class =" aler btn-sm" id="tag">${strTags?.split(",")[index]}</span> <br>`
+        
+       
+        
+     }
+    */
+
+    for (const key in mealInfo) {
+     
+        if (key.startsWith ('strIngredient')) 
+            if(mealInfo[key].trim().length!=0)
+            mealIngredient.push(mealInfo[key])
+        if (key.startsWith ('strMeasure')) 
+        if(mealInfo[key].trim().length!=0)
+        mealMeasure.push(mealInfo[key])
+
+        
+    }
+    for (let index = 0; index < mealIngredient.length; index++) {
+        IngredientsStr+= `<li class="bord"> ${mealMeasure[index]} ${mealIngredient[index]}</li>`
+        
+    }
+
+
 
     let box =``
    
@@ -294,19 +351,10 @@ getFood()
 <h3>Area : <span>${items[i].strArea}</span></h3>
 <h3>Category : <span>${items[i].strCategory}</span></h3>
 <h3>Recipes : </h3>
+
+
 <ul>
-<li class="bord">  ${items[i].strMeasure1} ${items[i].strIngredient1}</li>
-<li class="bord">  ${items[i].strMeasure2} ${items[i].strIngredient2}</li>
-<li class="bord">  ${items[i].strMeasure3} ${items[i].strIngredient3}</li>
-<li class="bord">  ${items[i].strMeasure4} ${items[i].strIngredient4 == [] | null ? "Yummy": items[i].strIngredient4}</li>
-<li class="bord"> ${items[i].strMeasure5}  ${items[i].strIngredient5 == [] | null ? "Yummy": items[i].strIngredient5}</li>
-<li class="bord" >  ${items[i].strMeasure6} ${items[i].strIngredient6 == [] | null ? "Yummy": items[i].strIngredient6}</li>
-<li class="bord">  ${items[i].strMeasure7} ${items[i].strIngredient7 == [] | null ? "Yummy": items[i].strIngredient7}</li>
-<li class="bord">  ${items[i].strMeasure8} ${items[i].strIngredient8 == [] | null ? "Yummy": items[i].strIngredient8}</li>
-<li class="bord">  ${items[i].strMeasure9} ${items[i].strIngredient9 == [] | null ? "Yummy": items[i].strIngredient9}</li>
-<li class="bord">  ${items[i].strMeasure10} ${items[i].strIngredient10 == [] | null ? "Yummy": items[i].strIngredient10}</li>
-<li class="bord">  ${items[i].strMeasure11} ${items[i].strIngredient11 == [] | null ? "Yummy": items[i].strIngredient11}</li>
-<li class="bord">  ${items[i].strMeasure12} ${items[i].strIngredient12 == [] | null ? "Yummy": items[i].strIngredient12}</li>
+${IngredientsStr}
 </ul>
 
 
@@ -314,7 +362,9 @@ getFood()
 
 <div>
 <h3 class="mb-3">Tages : </h3>
-<span  class =" aler btn-sm">${items[i].strTags  == null | [] ? '#' : items[i].strTags}</span> <br>
+<span  class =" aler btn-sm" id="tag">${items[i].strTags  == null | [] ? '#' : items[i].strTags}</span> <br>
+
+
 </div>
 
 
@@ -336,6 +386,23 @@ getFood()
 }
 
 //
+/*
+${tagdisplay}
+<span  class =" aler btn-sm" id="tag">${items[i].strTags  == null | [] ? '#' : items[i].strTags}</span> <br>
+<li class="bord">  ${items[i].strMeasure1} ${items[i].strIngredient1}</li>
+<li class="bord">  ${items[i].strMeasure2} ${items[i].strIngredient2}</li>
+<li class="bord">  ${items[i].strMeasure3} ${items[i].strIngredient3}</li>
+<li class="bord">  ${items[i].strMeasure4} ${items[i].strIngredient4 == [] | null ? "Yummy": items[i].strIngredient4}</li>
+<li class="bord"> ${items[i].strMeasure5}  ${items[i].strIngredient5 == [] | null ? "Yummy": items[i].strIngredient5}</li>
+<li class="bord >  ${items[i].strMeasure6} ${items[i].strIngredient6 == [] | null ? "Yummy": items[i].strIngredient6}</li>
+<li class="bord
+">  ${items[i].strMeasure7} ${items[i].strIngredient7 == [] | null  ? "Yummy": items[i].strIngredient7}</li>
+<li class="bord">  ${items[i].strMeasure8} ${items[i].strIngredient8 == [] | null  ? "Yummy": items[i].strIngredient8}</li>
+<li class="bord">  ${items[i].strMeasure9} ${items[i].strIngredient9 == [] | null  ? "Yummy": items[i].strIngredient9}</li>
+<li class="bord ">  ${items[i].strMeasure10} ${items[i].strIngredient10 == [] | null ? "Yummy": items[i].strIngredient10}</li>
+<li class="bord ">  ${items[i].strMeasure11} ${items[i].strIngredient11 == [] | null ? "Yummy": items[i].strIngredient11}</li>
+<li class="bord ">  ${items[i].strMeasure12} ${items[i].strIngredient12 == [] | null ? "Yummy": items[i].strIngredient12}</li>
+*/ 
 // CONTACT US
 
 let viwe = document.getElementById('row')
@@ -349,6 +416,7 @@ cu.addEventListener("click",contact);
 
 function contact () {
     $(".del").remove();
+    closenav()
     viwe.innerHTML = `
    
 <div class="container w-75 m-auto cons" id="contain">
@@ -575,6 +643,7 @@ searchl()
 async function searchl(l , v) {
     $("#goodfood").remove();
     $("#serachbar").removeClass("d-none");
+    closenav()
     if (v == 0) {
         var myResponse = await fetch(
           `https://www.themealdb.com/api/json/v1/1/search.php?s=${l}`
